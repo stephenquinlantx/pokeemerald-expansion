@@ -20,7 +20,7 @@ ThreeIsland_BerryForest_EventScript_Lostelle::
 	waitse
 	playmoncry SPECIES_HYPNO, CRY_MODE_ENCOUNTER
 	waitmoncry
-	setwildbattle SPECIES_HYPNO, 30
+	setwildbattle SPECIES_HYPNO, 42
 	dowildbattle
 	applymovement LOCALID_BERRY_FOREST_LOSTELLE, Common_Movement_FacePlayer
 	waitmovement 0

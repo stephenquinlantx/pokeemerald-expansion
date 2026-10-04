@@ -32,7 +32,7 @@ CeruleanCave_B1F_EventScript_Mewtwo::
 	delay 20
 	playbgm MUS_RG_ENCOUNTER_GYM_LEADER, 0
 	waitbuttonpress
-	setwildbattle SPECIES_MEWTWO, 70
+	setwildbattle SPECIES_MEWTWO, 100
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE

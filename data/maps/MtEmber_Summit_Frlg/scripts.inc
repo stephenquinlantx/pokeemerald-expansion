@@ -24,7 +24,7 @@ MtEmber_Summit_EventScript_ShowMoltres::
 MtEmber_Summit_EventScript_Moltres::
 	lock
 	faceplayer
-	setwildbattle SPECIES_MOLTRES, 50
+	setwildbattle SPECIES_MOLTRES, 80
 	waitse
 	playmoncry SPECIES_MOLTRES, CRY_MODE_ENCOUNTER
 	message Text_Gyaoo

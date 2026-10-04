@@ -35,7 +35,7 @@ PowerPlant_EventScript_ShowElectrode2::
 PowerPlant_EventScript_Zapdos::
 	lock
 	faceplayer
-	setwildbattle SPECIES_ZAPDOS, 50
+	setwildbattle SPECIES_ZAPDOS, 80
 	waitse
 	playmoncry SPECIES_ZAPDOS, CRY_MODE_ENCOUNTER
 	message Text_Gyaoo
@@ -68,7 +68,7 @@ PowerPlant_EventScript_RanFromZapdos::
 PowerPlant_EventScript_Electrode1::
 	lock
 	faceplayer
-	setwildbattle SPECIES_ELECTRODE, 34
+	setwildbattle SPECIES_ELECTRODE, 48
 	waitse
 	playmoncry SPECIES_ELECTRODE, CRY_MODE_ENCOUNTER
 	delay 40
@@ -92,7 +92,7 @@ PowerPlant_EventScript_FoughtElectrode1::
 PowerPlant_EventScript_Electrode2::
 	lock
 	faceplayer
-	setwildbattle SPECIES_ELECTRODE, 34
+	setwildbattle SPECIES_ELECTRODE, 48
 	waitse
 	playmoncry SPECIES_ELECTRODE, CRY_MODE_ENCOUNTER
 	delay 40

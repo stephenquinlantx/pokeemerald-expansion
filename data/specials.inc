@@ -638,3 +638,9 @@ gSpecials::
 	def_special UpdateTrainerCardPhotoIcons
 	def_special StickerManGetBragFlags
 	def_special CheckAddCoins
+
+	@ Nine-Region custom systems
+	def_special NR_GetObedienceCapForScript
+	def_special NR_BillCheckTradeEvo
+	def_special NR_BillDoTradeEvo, waitstate=1
+	def_special NR_BillDoPartnerEvo, waitstate=1

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "nine_region.h"
 #include "item_use.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -250,6 +251,11 @@ STATIC_ASSERT(I_EXP_SHARE_ITEM < GEN_6 || I_EXP_SHARE_FLAG > TEMP_FLAGS_END, You
 void ItemUseOutOfBattle_ExpShare(u8 taskId)
 {
 #if I_EXP_SHARE_ITEM >= GEN_6
+    if (NR_IsHardMode()) // Nine-Region: the party Exp. Share can't be used on Hard
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+        return;
+    }
     if (IsGen6ExpShareEnabled())
     {
         PlaySE(SE_PC_OFF);

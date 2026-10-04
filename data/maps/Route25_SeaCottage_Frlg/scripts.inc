@@ -88,7 +88,7 @@ Route25_SeaCottage_EventScript_BillWalkToTeleporter::
 
 Route25_SeaCottage_EventScript_BillGoToSSAnne::
 	msgbox Route25_SeaCottage_Text_SSAnnePartyYouGoInstead
-	release
+	goto Route25_SeaCottage_EventScript_NRTradeMachine
 	end
 
 Route25_SeaCottage_EventScript_BillGiveSSTicket::
@@ -121,6 +121,35 @@ Route25_SeaCottage_EventScript_NoRoomForSSTicket::
 
 Route25_SeaCottage_EventScript_BillGoLookAtPC::
 	msgbox Route25_SeaCottage_Text_CheckOutRareMonsOnPC
+	goto Route25_SeaCottage_EventScript_NRTradeMachine
+	end
+
+@ Nine-Region: Bill's machine simulates a trade so trade evolutions work.
+Route25_SeaCottage_EventScript_NRTradeMachine::
+	msgbox Route25_SeaCottage_Text_NROfferTrade, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route25_SeaCottage_EventScript_NRDecline
+	msgbox Route25_SeaCottage_Text_NRWhichMon, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	goto_if_ge VAR_0x8004, PARTY_SIZE, Route25_SeaCottage_EventScript_NRDecline
+	special NR_BillCheckTradeEvo
+	goto_if_eq VAR_RESULT, FALSE, Route25_SeaCottage_EventScript_NRNoReaction
+	msgbox Route25_SeaCottage_Text_NRInToTheMachine, MSGBOX_DEFAULT
+	closemessage
+	special NR_BillDoTradeEvo
+	goto_if_ge VAR_0x8005, PARTY_SIZE, Route25_SeaCottage_EventScript_NRDone
+	special NR_BillDoPartnerEvo
+Route25_SeaCottage_EventScript_NRDone::
+	msgbox Route25_SeaCottage_Text_NRDone, MSGBOX_DEFAULT
+	release
+	end
+
+Route25_SeaCottage_EventScript_NRNoReaction::
+	msgbox Route25_SeaCottage_Text_NRNoReaction, MSGBOX_DEFAULT
+	release
+	end
+
+Route25_SeaCottage_EventScript_NRDecline::
+	msgbox Route25_SeaCottage_Text_NRComeBack, MSGBOX_DEFAULT
 	release
 	end
 
@@ -403,3 +432,32 @@ Route25_SeaCottage_Text_BillsFavoriteMonList::
 Route25_SeaCottage_Text_SeeWhichMon::
 	.string "Which POKéMON do you want to see?$"
 
+
+Route25_SeaCottage_Text_NROfferTrade::
+	.string "BILL: Oh, and that teleporter of\n"
+	.string "mine can do more than split cells.\p"
+	.string "It can simulate a trade! POKéMON\n"
+	.string "that evolve by trading will evolve\l"
+	.string "in it.\p"
+	.string "Want to give it a try?$"
+
+Route25_SeaCottage_Text_NRWhichMon::
+	.string "Which POKéMON goes in?$"
+
+Route25_SeaCottage_Text_NRInToTheMachine::
+	.string "Into the machine it goes!\n"
+	.string "Here goes nothing…$"
+
+Route25_SeaCottage_Text_NRNoReaction::
+	.string "Hmm… The machine didn't react.\p"
+	.string "That POKéMON doesn't evolve by\n"
+	.string "trading, or it needs to hold an item\l"
+	.string "or have a partner in your party.$"
+
+Route25_SeaCottage_Text_NRDone::
+	.string "BILL: It worked! Come back any time\n"
+	.string "you need a trade evolution.$"
+
+Route25_SeaCottage_Text_NRComeBack::
+	.string "BILL: Come back if you want to use\n"
+	.string "my machine.$"

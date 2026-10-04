@@ -14321,7 +14321,7 @@
               {
                 "min_level": 22,
                 "max_level": 22,
-                "species": "SPECIES_VENONAT"
+                "species": "SPECIES_BULBASAUR"
               },
               {
                 "min_level": 31,
@@ -14341,7 +14341,7 @@
               {
                 "min_level": 22,
                 "max_level": 22,
-                "species": "SPECIES_VENONAT"
+                "species": "SPECIES_HITMONLEE"
               },
               {
                 "min_level": 23,
@@ -14475,7 +14475,7 @@
               {
                 "min_level": 22,
                 "max_level": 22,
-                "species": "SPECIES_VENONAT"
+                "species": "SPECIES_BULBASAUR"
               },
               {
                 "min_level": 31,
@@ -14495,7 +14495,7 @@
               {
                 "min_level": 22,
                 "max_level": 22,
-                "species": "SPECIES_VENONAT"
+                "species": "SPECIES_HITMONLEE"
               },
               {
                 "min_level": 23,
@@ -14629,7 +14629,7 @@
               {
                 "min_level": 22,
                 "max_level": 22,
-                "species": "SPECIES_PARAS"
+                "species": "SPECIES_CHARMANDER"
               },
               {
                 "min_level": 33,
@@ -14649,7 +14649,7 @@
               {
                 "min_level": 22,
                 "max_level": 22,
-                "species": "SPECIES_PARAS"
+                "species": "SPECIES_HITMONCHAN"
               },
               {
                 "min_level": 25,
@@ -14783,7 +14783,7 @@
               {
                 "min_level": 22,
                 "max_level": 22,
-                "species": "SPECIES_PARAS"
+                "species": "SPECIES_CHARMANDER"
               },
               {
                 "min_level": 33,
@@ -14803,7 +14803,7 @@
               {
                 "min_level": 22,
                 "max_level": 22,
-                "species": "SPECIES_PARAS"
+                "species": "SPECIES_HITMONCHAN"
               },
               {
                 "min_level": 25,
@@ -14957,7 +14957,7 @@
               {
                 "min_level": 23,
                 "max_level": 23,
-                "species": "SPECIES_PARAS"
+                "species": "SPECIES_KABUTO"
               },
               {
                 "min_level": 26,
@@ -15111,7 +15111,7 @@
               {
                 "min_level": 23,
                 "max_level": 23,
-                "species": "SPECIES_PARAS"
+                "species": "SPECIES_KABUTO"
               },
               {
                 "min_level": 26,
@@ -15245,7 +15245,7 @@
               {
                 "min_level": 23,
                 "max_level": 23,
-                "species": "SPECIES_VENONAT"
+                "species": "SPECIES_SQUIRTLE"
               },
               {
                 "min_level": 30,
@@ -15265,7 +15265,7 @@
               {
                 "min_level": 23,
                 "max_level": 23,
-                "species": "SPECIES_VENONAT"
+                "species": "SPECIES_OMANYTE"
               },
               {
                 "min_level": 25,
@@ -15399,7 +15399,7 @@
               {
                 "min_level": 23,
                 "max_level": 23,
-                "species": "SPECIES_VENONAT"
+                "species": "SPECIES_SQUIRTLE"
               },
               {
                 "min_level": 30,
@@ -15419,7 +15419,7 @@
               {
                 "min_level": 23,
                 "max_level": 23,
-                "species": "SPECIES_VENONAT"
+                "species": "SPECIES_OMANYTE"
               },
               {
                 "min_level": 25,

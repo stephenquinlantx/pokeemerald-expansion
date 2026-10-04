@@ -184,3 +184,60 @@ IndigoPlateau_Exterior_Movement_OakLeave::
 IndigoPlateau_Exterior_Movement_OakExitBuilding::
 	walk_down
 	step_end
+
+@ Nine-Region: Giovanni makes one last stand at the League entrance.
+@ Beating him grants the 9th badge, lifting the obedience cap to level 100.
+IndigoPlateau_Exterior_EventScript_NRGiovanni::
+	lock
+	faceplayer
+	playbgm MUS_RG_ENCOUNTER_ROCKET, 0
+	msgbox IndigoPlateau_Exterior_Text_NRGiovanniIntro, MSGBOX_DEFAULT
+	trainerbattle_single TRAINER_NR_GIOVANNI_REVENGE, IndigoPlateau_Exterior_Text_NRGiovanniChallenge, IndigoPlateau_Exterior_Text_NRGiovanniDefeat, IndigoPlateau_Exterior_EventScript_NRGiovanniDefeated, NO_MUSIC
+	release
+	end
+
+IndigoPlateau_Exterior_EventScript_NRGiovanniDefeated::
+	msgbox IndigoPlateau_Exterior_Text_NRGiovanniPostBattle, MSGBOX_DEFAULT
+	setflag FLAG_NR_BADGE09
+	playfanfare MUS_OBTAIN_BADGE
+	message IndigoPlateau_Exterior_Text_NRReceivedBadge
+	waitmessage
+	waitfanfare
+	msgbox IndigoPlateau_Exterior_Text_NRBadgeExplained, MSGBOX_DEFAULT
+	closemessage
+	fadescreen FADE_TO_BLACK
+	removeobject LOCALID_NR_GIOVANNI
+	fadescreen FADE_FROM_BLACK
+	release
+	end
+
+IndigoPlateau_Exterior_Text_NRGiovanniIntro::
+	.string "GIOVANNI: So, you made it through\n"
+	.string "VICTORY ROAD.\p"
+	.string "You humiliated TEAM ROCKET at every\n"
+	.string "turn. I disbanded my organization\l"
+	.string "because of you.\p"
+	.string "But I did not come here to admit\n"
+	.string "defeat. I came for revenge!$"
+
+IndigoPlateau_Exterior_Text_NRGiovanniChallenge::
+	.string "The POKéMON LEAGUE will have to\n"
+	.string "wait. You face me first!$"
+
+IndigoPlateau_Exterior_Text_NRGiovanniDefeat::
+	.string "…Once again, I lose.$"
+
+IndigoPlateau_Exterior_Text_NRGiovanniPostBattle::
+	.string "GIOVANNI: Your bond with your\n"
+	.string "POKéMON is beyond anything I can\l"
+	.string "break.\p"
+	.string "Take this. A ROCKET BADGE, from the\n"
+	.string "BOSS himself. You have earned it.$"
+
+IndigoPlateau_Exterior_Text_NRReceivedBadge::
+	.string "{PLAYER} received the ROCKET BADGE\n"
+	.string "from GIOVANNI!$"
+
+IndigoPlateau_Exterior_Text_NRBadgeExplained::
+	.string "With all nine KANTO BADGES, POKéMON\n"
+	.string "of any level will now obey you.$"

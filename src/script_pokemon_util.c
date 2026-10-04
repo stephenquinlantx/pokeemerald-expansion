@@ -1,4 +1,5 @@
 #include "global.h"
+#include "nine_region.h"
 #include "battle.h"
 #include "battle_gfx_sfx_util.h"
 #include "berry.h"
@@ -129,7 +130,13 @@ void CreateScriptedWildMon(enum Species species, u8 level, enum Item item)
         GetSynchronizedGender(STATIC_WILDMON_ORIGIN, species),
         GetSynchronizedNature(STATIC_WILDMON_ORIGIN, species),
         RANDOM_UNOWN_LETTER);
-    CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][0], species, level, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
+    u8 ivs = USE_RANDOM_IVS;
+    if (NR_IsPerfectWildSpecies(species)) // Nine-Region: legendaries are perfect
+    {
+        personality = NR_GetPerfectPersonality(species);
+        ivs = MAX_PER_STAT_IVS;
+    }
+    CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][0], species, level, personality, OTID_STRUCT_PLAYER_ID, ivs);
     GiveMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][0]);
     if (item)
     {
@@ -387,7 +394,9 @@ u32 ScriptGiveMon(enum Species species, u8 level, enum Item item)
     struct Pokemon mon;
     u8 heldItem[2];
 
-    CreateRandomMon(&mon, species, level);
+    // Nine-Region: gifts are perfect.
+    CreateMonWithIVs(&mon, species, level, NR_GetPerfectPersonality(species), OTID_STRUCT_PLAYER_ID, MAX_PER_STAT_IVS);
+    GiveMonInitialMoveset(&mon);
     if (item)
     {
         heldItem[0] = item;
@@ -463,6 +472,9 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
     }
 
     monTemplate.ignoreTotalEvCheck = flags >> 26;
+
+    // Nine-Region: gifts and legendary encounters are perfect.
+    NR_ApplyPerfectTemplate(&monTemplate, side == B_SIDE_PLAYER);
 
     gSpecialVar_Result = ScriptGiveMonParameterized(side, slot, &monTemplate);
 }

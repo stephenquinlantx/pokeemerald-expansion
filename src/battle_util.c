@@ -1,4 +1,5 @@
 #include "global.h"
+#include "nine_region.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_anim_scripts.h"
@@ -5640,41 +5641,27 @@ enum Obedience GetAttackerObedienceForAction(void)
         return OBEYS;
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         return OBEYS;
-    if (B_OBEDIENCE_MECHANICS < GEN_8 && !IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))
+    // Nine-Region: every Pokémon (caught or traded) obeys up to the badge cap
+    // for the current region. Easy ignores caps; Hard makes over-cap Pokémon
+    // always disobey.
+    if (!NR_ObedienceEnabled())
         return OBEYS;
-    if (FlagGet(FLAG_BADGE08_GET)) // Rain Badge, ignore obedience altogether
+
+    obedienceLevel = NR_GetObedienceCap();
+    if (obedienceLevel >= MAX_LEVEL)
         return OBEYS;
 
-    obedienceLevel = 10;
-
-    if (FlagGet(FLAG_BADGE01_GET)) // Stone Badge
-        obedienceLevel = 20;
-    if (FlagGet(FLAG_BADGE02_GET)) // Knuckle Badge
-        obedienceLevel = 30;
-    if (FlagGet(FLAG_BADGE03_GET)) // Dynamo Badge
-        obedienceLevel = 40;
-    if (FlagGet(FLAG_BADGE04_GET)) // Heat Badge
-        obedienceLevel = 50;
-    if (FlagGet(FLAG_BADGE05_GET)) // Balance Badge
-        obedienceLevel = 60;
-    if (FlagGet(FLAG_BADGE06_GET)) // Feather Badge
-        obedienceLevel = 70;
-    if (FlagGet(FLAG_BADGE07_GET)) // Mind Badge
-        obedienceLevel = 80;
-
-    if (B_OBEDIENCE_MECHANICS >= GEN_8
-     && !IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))
-        levelReferenced = gBattleMons[gBattlerAttacker].metLevel;
-    else
-        levelReferenced = gBattleMons[gBattlerAttacker].level;
-
+    levelReferenced = gBattleMons[gBattlerAttacker].level;
     if (levelReferenced <= obedienceLevel)
         return OBEYS;
 
     rnd = Random();
-    calc = (levelReferenced + obedienceLevel) * (rnd & 255) >> 8;
-    if (calc < obedienceLevel)
-        return OBEYS;
+    if (!NR_IsHardMode())
+    {
+        calc = (levelReferenced + obedienceLevel) * (rnd & 255) >> 8;
+        if (calc < obedienceLevel)
+            return OBEYS;
+    }
 
     //  Clear the Z-Move flags if the battler is disobedient as to not waste the Z-Move
     if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_Z_MOVE)
@@ -9632,6 +9619,8 @@ bool32 MoveEffectIsGuaranteed(enum BattlerId battler, enum Ability battlerAbilit
 bool32 IsGen6ExpShareEnabled(void)
 {
     if (I_EXP_SHARE_FLAG <= TEMP_FLAGS_END)
+        return FALSE;
+    if (NR_IsHardMode()) // Nine-Region: no party Exp. Share on Hard
         return FALSE;
 
     return FlagGet(I_EXP_SHARE_FLAG);

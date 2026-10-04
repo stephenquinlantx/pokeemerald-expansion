@@ -32,9 +32,9 @@ Route15_WestEntrance_2F_EventScript_Aide::
 	call Route15_WestEntrance_2F_EventScript_GetAideRequestInfo
 	goto_if_lt VAR_0x8006, REQUIRED_CAUGHT_MONS, Aide_EventScript_HaventCaughtEnough
 	msgbox Route15_WestEntrance_2F_Text_GreatHereYouGo
-	checkitemspace ITEM_EXP_SHARE
+	checkitemspace ITEM_LUCKY_EGG
 	goto_if_eq VAR_RESULT, FALSE, Aide_EventScript_NoRoomForItem
-	giveitem_msg Route15_WestEntrance_2F_Text_ReceivedItemFromAide, ITEM_EXP_SHARE
+	giveitem_msg Route15_WestEntrance_2F_Text_ReceivedItemFromAide, ITEM_LUCKY_EGG
 	setflag FLAG_GOT_EXP_SHARE_FROM_OAKS_AIDE
 	msgbox Route15_WestEntrance_2F_Text_ExplainExpShare
 	release
@@ -47,7 +47,7 @@ Route15_WestEntrance_2F_EventScript_AlreadyGotExpShare::
 
 Route15_WestEntrance_2F_EventScript_GetAideRequestInfo::
 	buffernumberstring STR_VAR_1, REQUIRED_CAUGHT_MONS
-	bufferitemname STR_VAR_2, ITEM_EXP_SHARE
+	bufferitemname STR_VAR_2, ITEM_LUCKY_EGG
 	return
 
 Route15_WestEntrance_2F_Text_GiveItemIfCaughtEnough::
@@ -73,11 +73,9 @@ Route15_WestEntrance_2F_Text_ReceivedItemFromAide::
 	.string "from the AIDE.$"
 
 Route15_WestEntrance_2F_Text_ExplainExpShare::
-	.string "EXP. SHARE is an item to be held\n"
-	.string "by a POKéMON.\p"
-	.string "The POKéMON will receive a share\n"
-	.string "of the EXP. Points without having\l"
-	.string "to battle.$"
+	.string "A POKéMON holding a LUCKY EGG\n"
+	.string "earns extra EXP. Points from\l"
+	.string "every battle.$"
 
 Route15_WestEntrance_2F_Text_LargeShiningBird::
 	.string "Let's see what the binoculars have\n"

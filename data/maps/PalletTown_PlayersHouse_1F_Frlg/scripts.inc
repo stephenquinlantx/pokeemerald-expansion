@@ -1,5 +1,37 @@
 PalletTown_PlayersHouse_1F_Frlg_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, PalletTown_PlayersHouse_1F_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PalletTown_PlayersHouse_1F_OnFrame
 	.byte 0
+
+@ Nine-Region: Mom hands over the Exp. Share the first time you come downstairs.
+PalletTown_PlayersHouse_1F_OnTransition::
+	call_if_unset FLAG_NR_GOT_EXP_SHARE, PalletTown_PlayersHouse_1F_EventScript_QueueExpShare
+	end
+
+PalletTown_PlayersHouse_1F_EventScript_QueueExpShare::
+	setvar VAR_TEMP_1, 1
+	return
+
+PalletTown_PlayersHouse_1F_OnFrame::
+	map_script_2 VAR_TEMP_1, 1, PalletTown_PlayersHouse_1F_EventScript_MomGivesExpShare
+	.2byte 0
+
+PalletTown_PlayersHouse_1F_EventScript_MomGivesExpShare::
+	lockall
+	setvar VAR_TEMP_1, 0
+	applymovement LOCALID_PLAYERS_HOUSE_1F_MOM, Common_Movement_ExclamationMark
+	waitmovement 0
+	msgbox PalletTown_PlayersHouse_1F_Text_MomHereTakeThis
+	checkitemspace ITEM_EXP_SHARE
+	goto_if_eq VAR_RESULT, FALSE, PalletTown_PlayersHouse_1F_EventScript_MomExpShareDone
+	bufferitemname STR_VAR_2, ITEM_EXP_SHARE
+	giveitem_msg PalletTown_PlayersHouse_1F_Text_ReceivedExpShare, ITEM_EXP_SHARE
+	setflag FLAG_NR_GOT_EXP_SHARE
+	msgbox PalletTown_PlayersHouse_1F_Text_MomExplainExpShare
+PalletTown_PlayersHouse_1F_EventScript_MomExpShareDone::
+	closemessage
+	releaseall
+	end
 
 PalletTown_PlayersHouse_1F_EventScript_Mom::
 	lock
@@ -90,3 +122,17 @@ PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad::
 
 PalletTown_PlayersHouse_1F_Text_OopsWrongSide::
 	.string "Oops, wrong side…$"
+
+PalletTown_PlayersHouse_1F_Text_MomHereTakeThis::
+	.string "MOM: {PLAYER}! Before you head out,\n"
+	.string "take this with you.$"
+
+PalletTown_PlayersHouse_1F_Text_ReceivedExpShare::
+	.string "{PLAYER} received the {STR_VAR_2}\n"
+	.string "from MOM!$"
+
+PalletTown_PlayersHouse_1F_Text_MomExplainExpShare::
+	.string "MOM: Turn the EXP. SHARE on from\n"
+	.string "your BAG, and your whole team learns\l"
+	.string "from every battle.\p"
+	.string "Now go on, PROF. OAK is waiting!$"

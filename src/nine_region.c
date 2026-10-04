@@ -49,6 +49,20 @@ u32 NR_GetObedienceCap(void)
     return NR_OBEDIENCE_BASE + NR_OBEDIENCE_STEP * badges;
 }
 
+// Percent chance that a Pokémon at `level` disobeys under `cap`:
+// 10% per level over the cap, up to 100%.
+u32 NR_GetDisobeyChance(u32 level, u32 cap)
+{
+    u32 over;
+
+    if (level <= cap)
+        return 0;
+    over = level - cap;
+    if (over >= 10)
+        return 100;
+    return over * 10;
+}
+
 bool32 NR_ObedienceEnabled(void)
 {
     return GetCurrentDifficultyLevel() != DIFFICULTY_EASY;

@@ -8,6 +8,7 @@ struct PokemonTemplate;
 // Badges and obedience
 u32 NR_CountRegionBadges(void);
 u32 NR_GetObedienceCap(void);
+u32 NR_GetDisobeyChance(u32 level, u32 cap);
 bool32 NR_ObedienceEnabled(void);
 bool32 NR_IsHardMode(void);
 

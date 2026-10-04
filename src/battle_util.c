@@ -5642,8 +5642,9 @@ enum Obedience GetAttackerObedienceForAction(void)
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         return OBEYS;
     // Nine-Region: every Pokémon (caught or traded) obeys up to the badge cap
-    // for the current region. Easy ignores caps; Hard makes over-cap Pokémon
-    // always disobey.
+    // for the current region. Each level over the cap adds a 10% chance to
+    // disobey (10 or more levels over never obeys). Easy ignores caps; Hard
+    // makes over-cap Pokémon always disobey.
     if (!NR_ObedienceEnabled())
         return OBEYS;
 
@@ -5656,12 +5657,8 @@ enum Obedience GetAttackerObedienceForAction(void)
         return OBEYS;
 
     rnd = Random();
-    if (!NR_IsHardMode())
-    {
-        calc = (levelReferenced + obedienceLevel) * (rnd & 255) >> 8;
-        if (calc < obedienceLevel)
-            return OBEYS;
-    }
+    if (!NR_IsHardMode() && RandomUniform(RNG_NONE, 0, 99) >= NR_GetDisobeyChance(levelReferenced, obedienceLevel))
+        return OBEYS;
 
     //  Clear the Z-Move flags if the battler is disobedient as to not waste the Z-Move
     if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_Z_MOVE)

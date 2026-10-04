@@ -80,3 +80,13 @@ TEST("Nine-Region: gift templates become perfect but eggs do not")
         EXPECT_EQ(egg.ivs[i], USE_RANDOM_IVS);
     }
 }
+
+TEST("Nine-Region: disobedience chance is 10% per level over the cap")
+{
+    EXPECT_EQ(NR_GetDisobeyChance(19, 19), 0);
+    EXPECT_EQ(NR_GetDisobeyChance(15, 19), 0);
+    EXPECT_EQ(NR_GetDisobeyChance(20, 19), 10);
+    EXPECT_EQ(NR_GetDisobeyChance(24, 19), 50);
+    EXPECT_EQ(NR_GetDisobeyChance(29, 19), 100);
+    EXPECT_EQ(NR_GetDisobeyChance(60, 19), 100);
+}

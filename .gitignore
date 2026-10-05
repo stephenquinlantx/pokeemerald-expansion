@@ -66,3 +66,12 @@ tools/aif2pcm/aif2pcm
 *.smolTM
 __pycache__
 .map_version
+
+# Sinnoh import (dev_scripts/sinnoh/import_sinnoh.py): generated from a local Hyper Emerald ROM,
+# never committed. See dev_scripts/sinnoh/README.md.
+include/constants/sinnoh_import.h
+dev_scripts/sinnoh/imported.json
+dev_scripts/sinnoh/hack_events.json
+dev_scripts/sinnoh/import_log.txt
+data/tilesets/primary/sinnoh_*/
+data/tilesets/secondary/sinnoh_*/

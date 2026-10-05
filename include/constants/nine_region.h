@@ -1,10 +1,14 @@
 #ifndef GUARD_CONSTANTS_NINE_REGION_H
 #define GUARD_CONSTANTS_NINE_REGION_H
 
-// Nine-Region hack: save data claimed by custom systems (FireRed/Kanto build).
-// These vars and flags are unused by vanilla FireRed scripts.
+// Nine-Region hack: save data claimed by custom systems.
+// The flags are unused in both FireRed and Emerald; the difficulty var differs per game.
 
+#if IS_FRLG
 #define VAR_NR_DIFFICULTY          0x408C  // VAR_0x408C: Easy / Normal / Hard (DIFFICULTY_* values)
+#else
+#define VAR_NR_DIFFICULTY          0x40F7  // VAR_UNUSED_0x40F7 in Emerald (0x408C is a Littleroot var there)
+#endif
 
 #define FLAG_NR_BADGE09            0x4A7   // FLAG_UNUSED_0x4A7: 9th badge, from the region's villain leader
 #define FLAG_NR_DIFFICULTY_CHOSEN  0x4A8   // FLAG_UNUSED_0x4A8: difficulty picked at new game

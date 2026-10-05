@@ -85,6 +85,8 @@ WEATHERS = ['WEATHER_NONE', 'WEATHER_SUNNY_CLOUDS', 'WEATHER_SUNNY', 'WEATHER_RA
 BATTLE_SCENES = ['MAP_BATTLE_SCENE_NORMAL', 'MAP_BATTLE_SCENE_GYM', 'MAP_BATTLE_SCENE_MAGMA',
                  'MAP_BATTLE_SCENE_AQUA', 'MAP_BATTLE_SCENE_SIDNEY', 'MAP_BATTLE_SCENE_PHOEBE',
                  'MAP_BATTLE_SCENE_GLACIA', 'MAP_BATTLE_SCENE_DRAKE', 'MAP_BATTLE_SCENE_FRONTIER']
+# Names the hack gives areas that we call by their Sinnoh names.
+RENAME_SECTIONS = {'Regigigas Temple': 'Snowpoint Temple'}
 CONNECTION_DIRS = {1: 'down', 2: 'up', 3: 'left', 4: 'right', 5: 'dive', 6: 'emerge'}
 
 # The hack kept Emerald's primary tileset slots but redrew General (509 of 512 tiles differ),
@@ -177,7 +179,7 @@ class Importer:
             by_sec.setdefault(sec, []).append((g, n, hd))
         names = {}
         for sec, maps in by_sec.items():
-            base = camel(sec)
+            base = camel(RENAME_SECTIONS.get(sec, sec))
             outdoor = [m for m in maps if m[2]['map_type'] in OUTDOOR]
             first = outdoor[0] if outdoor else None
             idx = 1
